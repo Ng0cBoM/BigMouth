@@ -856,6 +856,8 @@ MonoBehaviour:
   - {fileID: 7824206494393515754, guid: efa2c3422fe9b304abdc2bc4055ee269, type: 3}
   - {fileID: 5170646366058257950, guid: c996b8ba475b0da4b942d2e01085c9a8, type: 3}
   - {fileID: 4063695693389989377, guid: 8d41b41155068934c8e23e1bcd07c311, type: 3}
+  radiusSpawn: 100
+  quantityEnemySpawn: 30
 --- !u!1 &1742602595 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1272036331211942, guid: 9edcf7e494cf3e640b18cb7495fb179a,

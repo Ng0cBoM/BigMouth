@@ -10,6 +10,9 @@ public class SpawnEnemyOnPlane : MonoBehaviour
     [SerializeField]
     private float radiusSpawn = 100f;
 
+    [SerializeField]
+    private int quantityEnemySpawn = 20;
+
     private void Awake()
     {
         SpawnEnemy();
@@ -19,7 +22,7 @@ public class SpawnEnemyOnPlane : MonoBehaviour
     {
         foreach (GameObject enemy in enemyTypeList)
         {
-            for (int i = 0; i < 15; i++)
+            for (int i = 0; i < quantityEnemySpawn; i++)
             {
                 float spawnPosX = Random.RandomRange(-radiusSpawn, radiusSpawn);
                 float spawnPosY = 0f;
