@@ -12,36 +12,36 @@ namespace DVAH
     public class LoadingManager : Singleton<LoadingManager>
     {
         [SerializeField]
-        bool _isUseLoading = true;
+        private bool _isUseLoading = true;
 
         [SerializeField]
-        float _maxTimeLoading = 0;
+        private float _maxTimeLoading = 0;
 
         [SerializeField]
-        int _numberCondition = 0;
+        private int _numberCondition = 0;
 
         [SerializeField]
-        List<bool> _conditionDone = new List<bool>();
-
+        private List<bool> _conditionDone = new List<bool>();
 
         [Header("---------Config---------")]
         [Space(10)]
         [SerializeField]
-        GameObject _loadingPopUp;
-        [SerializeField]
-        Slider _loading;
+        private GameObject _loadingPopUp;
 
         [SerializeField]
-        Text _loadingText, _versionText;
+        private Slider _loading;
 
-        Action<List<bool>> _onDone = null;
+        [SerializeField]
+        private Text _loadingText, _versionText;
 
-        float _loadingMaxvalue;
-        bool _isLoadingStart = false;
+        private Action<List<bool>> _onDone = null;
+
+        private float _loadingMaxvalue;
+        private bool _isLoadingStart = false;
 
         private void Start()
         {
-            _versionText.text = "Version <color=red>" + Application.version+"</color>";
+            _versionText.text = "Version <color=red>" + Application.version + "</color>";
         }
 
         /// <summary>
@@ -53,7 +53,7 @@ namespace DVAH
         /// <returns> LoadingManager component</returns>
         public LoadingManager Init(Action<List<bool>> onDone = null)
         {
-            if(_maxTimeLoading == 0.2f)
+            if (_maxTimeLoading == 0.2f)
             {
                 Debug.Log(CONSTANT.Prefix + $"==><color=yellow>Your time loading is to fast! You should call SetMaxTimeLoading first!</color><==");
             }
@@ -66,7 +66,7 @@ namespace DVAH
             _loadingMaxvalue = _loading.maxValue;
             _loading.value = 0;
             _loading.onValueChanged.RemoveAllListeners();
-            _onDone = onDone; 
+            _onDone = onDone;
             _loading.onValueChanged.AddListener((value) =>
             {
                 if (value == 100)
@@ -74,9 +74,9 @@ namespace DVAH
                     Debug.Log(CONSTANT.Prefix + $"==>Loading Done!<==");
                     _loadingPopUp.SetActive(false);
                     _isLoadingStart = false;
+
                     try
                     {
-                     
                         _ = FireBaseManager.Instant.LogEventWithParameter("screen_view_data", new Hashtable()
                         {
                             {"id_screen","loading_end" }
@@ -94,7 +94,6 @@ namespace DVAH
                     }
 
                     _loading.onValueChanged.RemoveAllListeners();
-
                 }
             });
 
@@ -125,23 +124,22 @@ namespace DVAH
         }
 
         // Update is called once per frame
-        void Update()
+        private void Update()
         {
             _loading.value += _loadingMaxvalue * Time.deltaTime / _maxTimeLoading;
-            _loadingText.text = string.Format("{0:0.0}%", _loading.value); 
+            _loadingText.text = string.Format("{0:0.0}%", _loading.value);
         }
 
         /// <summary>
         /// Stop loading immediately
         /// </summary>
         public void StopLoading()
-        { 
+        {
             if (_maxTimeLoading == 0.2f)
                 return;
             Debug.Log(CONSTANT.Prefix + $"==> <color=red>Force stop loading!</color> <==");
             _loadingMaxvalue = _loading.maxValue - _loading.value;
             _maxTimeLoading = 0.2f;
-
         }
 
         /// <summary>
@@ -160,7 +158,7 @@ namespace DVAH
             return this;
         }
 
-        async Task AddDoneLoading(Action<List<bool>> callback)
+        private async Task AddDoneLoading(Action<List<bool>> callback)
         {
             float timer = 0;
             while (!_isLoadingStart && timer < 240000)
@@ -201,7 +199,7 @@ namespace DVAH
             return this;
         }
 
-        async Task waitSelfDoneCondition(int id, Func<bool> predicate)
+        private async Task waitSelfDoneCondition(int id, Func<bool> predicate)
         {
             try
             {
@@ -213,20 +211,18 @@ namespace DVAH
 
                     if (timer > 240000)
                         break;
-
                 } while (!_isLoadingStart || !predicate.Invoke());
             }
             catch (Exception e)
             {
                 Debug.LogError(CONSTANT.Prefix + $"==> Error on invoke predicate waitSelfDoneCondition, error: {e.ToString()}! <==");
             }
-           
 
             await Task.Delay(1500);
             DoneCondition(id);
         }
 
-        async Task waitToSetDoneCondition(int id)
+        private async Task waitToSetDoneCondition(int id)
         {
             while (!_isLoadingStart)
             {
@@ -255,7 +251,6 @@ namespace DVAH
 
         private void OnDrawGizmosSelected()
         {
-     
             if (_isUseLoading && !Application.isPlaying)
             {
                 _loadingPopUp.SetActive(true);
