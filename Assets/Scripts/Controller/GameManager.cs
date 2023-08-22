@@ -8,7 +8,7 @@ using MoreMountains.TopDownEngine;
 public class GameManager : Singleton<GameManager>
 {
     [SerializeField]
-    private int timeMatchSeconds = 50;
+    private float timeMatchSeconds = 50;
 
     private state gameState;
 
@@ -29,12 +29,12 @@ public class GameManager : Singleton<GameManager>
     {
         if (gameState == state.Playing)
         {
-            timeMatchSeconds -= Mathf.RoundToInt(Time.deltaTime);
+            timeMatchSeconds -= Time.deltaTime;
             if (timeMatchSeconds <= 0)
             {
                 gameState = state.End;
             }
-            GUIManager.Instance.SetTimeText(timeMatchSeconds);
+            GUIManager.Instance.SetTimeText((int)timeMatchSeconds);
         }
     }
 }
