@@ -33,6 +33,7 @@ public class GameManager : Singleton<GameManager>
             if (timeMatchSeconds <= 0)
             {
                 gameState = state.End;
+                GUIManager.Instance.SetDeathScreen(true);
             }
             GUIManager.Instance.SetTimeText((int)timeMatchSeconds);
         }

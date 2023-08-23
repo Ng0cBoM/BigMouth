@@ -1,6 +1,7 @@
 using Cinemachine;
 using UnityEngine;
 using MoreMountains.TopDownEngine;
+using EgdFoundation;
 
 public class Player : MonoBehaviour
 {
@@ -9,8 +10,8 @@ public class Player : MonoBehaviour
     private float oldScore;
     private float pointNecessaryForGrownUp = 10f;
 
-    [SerializeField]
-    private CinemachineVirtualCamera cmvcam;
+    /*[SerializeField]
+    private CinemachineVirtualCamera cmvcam;*/
 
     private void Start()
     {
@@ -34,13 +35,6 @@ public class Player : MonoBehaviour
         gameObject.transform.localScale += Vector3.one;
         pointNecessaryForGrownUp += 10;
         oldScore = score;
-        if (cmvcam != null)
-        {
-            cmvcam.m_Lens.FieldOfView += 20;
-        }
-        else
-        {
-            Debug.LogWarning("Cinemachine Virtual Camera is not assigned!");
-        }
+        SignalBus.I.FireSignal<UpdateFieldOfViewCamera>(new UpdateFieldOfViewCamera());
     }
 }

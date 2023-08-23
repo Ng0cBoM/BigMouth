@@ -13,7 +13,7 @@ public class AttackEnemy : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Enemy"))
+        if (other.GetComponent<Enemy>())
         {
             Enemy enemy = other.gameObject.GetComponent<Enemy>();
             if (CanAttackEnemy(enemy.health))

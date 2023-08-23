@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1970644684131102225}
   - component: {fileID: 3979133959784845506}
   - component: {fileID: 5407562884703773130}
+  - component: {fileID: 3806483081279726511}
   m_Layer: 0
   m_Name: Enemy3
   m_TagString: Enemy
@@ -121,3 +122,23 @@ MonoBehaviour:
   health: 30
   shield: 30
   scoreForPlayerWhenEnemyDead: 2
+--- !u!114 &3806483081279726511
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4063695693389989377}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72de0b0360096ea41a18d17864ecb963, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BoundsBasedOn: 0
+  ExecuteOnEnable:
+    m_PersistentCalls:
+      m_Calls: []
+  ExecuteOnDisable:
+    m_PersistentCalls:
+      m_Calls: []
+  LifeTime: 0
