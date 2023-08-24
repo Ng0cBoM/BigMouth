@@ -25,7 +25,7 @@ public static class ScenesChanger
             () => AdManager.Instant.AdsOpenIsLoaded(0)
         );
         oldScene = SceneManager.GetActiveScene();
-        LoadingManager.Instant.Init(1, LoadingCompleteCallback).SetMaxTimeLoading(30);
+        LoadingManager.Instant.Init(1, LoadingCompleteCallback).SetMaxTimeLoading(3);
 
         loadSceneAsync = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Single);
     }

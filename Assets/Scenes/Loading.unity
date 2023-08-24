@@ -133,6 +133,8 @@ GameObject:
   m_Component:
   - component: {fileID: 364976551}
   - component: {fileID: 364976550}
+  - component: {fileID: 364976552}
+  - component: {fileID: 364976553}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -167,6 +169,32 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &364976552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 364976549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0afefd0942fff354897bd0503e275f09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &364976553
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 364976549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b4d071b416837d40b9bab019b738769, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SaveLoadMethod: 0
+  EncryptionKey: ThisIsTheKey
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -269,6 +297,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1107721498, guid: b085c1fb57ee7470a8a8c5cfa29431dd, type: 3}
+      propertyPath: m_SortingOrder
+      value: 999
+      objectReference: {fileID: 0}
     - target: {fileID: 1442542896, guid: b085c1fb57ee7470a8a8c5cfa29431dd, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -283,7 +315,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1442542896, guid: b085c1fb57ee7470a8a8c5cfa29431dd, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: -740.6853
       objectReference: {fileID: 0}
     - target: {fileID: 1482692545, guid: b085c1fb57ee7470a8a8c5cfa29431dd, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -412,7 +444,7 @@ PrefabInstance:
     - target: {fileID: 5039681637574412812, guid: b085c1fb57ee7470a8a8c5cfa29431dd,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5918510896647244879, guid: b085c1fb57ee7470a8a8c5cfa29431dd,
         type: 3}
@@ -492,7 +524,7 @@ PrefabInstance:
     - target: {fileID: 8498453281126072278, guid: b085c1fb57ee7470a8a8c5cfa29431dd,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 1195.5139
       objectReference: {fileID: 0}
     - target: {fileID: 8498453281126072278, guid: b085c1fb57ee7470a8a8c5cfa29431dd,
         type: 3}
@@ -600,4 +632,48 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &992116806
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 992116808}
+  - component: {fileID: 992116807}
+  m_Layer: 0
+  m_Name: SignalBus
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &992116807
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 992116806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9e71ca38fcfec84aaacc086eb76fa54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &992116808
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 992116806}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 4874.898, y: 1036.3203, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

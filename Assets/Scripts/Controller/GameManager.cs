@@ -4,15 +4,25 @@ using UnityEngine;
 using EgdFoundation;
 using TMPro;
 using MoreMountains.TopDownEngine;
+using MoreMountains.Tools;
+using UnityEngine.UI;
 
-public class GameManager : Singleton<GameManager>
+public class GameManager : MonoBehaviour
 {
+    public static GameManager I;
+
     [SerializeField]
     private float timeMatchSeconds = 50;
 
-    private state gameState;
+    private float timeShow;
 
-    private enum state
+    public state gameState;
+    public int score;
+
+    [SerializeField]
+    private Text timeText;
+
+    public enum state
     {
         Start,
         Playing,
@@ -23,19 +33,37 @@ public class GameManager : Singleton<GameManager>
     private void Awake()
     {
         gameState = state.Playing;
+        score = 0;
+        timeShow = timeMatchSeconds;
+        if (I == null)
+        {
+            I = this;
+        }
     }
 
     private void Update()
     {
         if (gameState == state.Playing)
         {
-            timeMatchSeconds -= Time.deltaTime;
-            if (timeMatchSeconds <= 0)
+            timeShow -= Time.deltaTime;
+            if (timeShow <= 0)
             {
                 gameState = state.End;
-                GUIManager.Instance.SetDeathScreen(true);
+                UpdateHighScore();
+                Time.timeScale = 0;
+                SignalBus.I.FireSignal<TimeOutSignal>(new TimeOutSignal());
             }
-            GUIManager.Instance.SetTimeText((int)timeMatchSeconds);
+            timeText.text = ((int)timeShow).ToString();
+        }
+    }
+
+    private void UpdateHighScore()
+    {
+        UserData userData = (UserData)MMSaveLoadManager.Load(typeof(UserData), "HighScore", "UserData");
+        if (score > userData.HighScore)
+        {
+            userData.HighScore = score;
+            MMSaveLoadManager.Save(userData, "HighScore", "UserData");
         }
     }
 }

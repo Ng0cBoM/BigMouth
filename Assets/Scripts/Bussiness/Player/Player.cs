@@ -5,29 +5,26 @@ using EgdFoundation;
 
 public class Player : MonoBehaviour
 {
-    public float damage = 1;
-    public float score = 0;
+    public int damage = 1;
+    public int score = 0;
     private float oldScore;
     private float pointNecessaryForGrownUp = 10f;
 
-    /*[SerializeField]
-    private CinemachineVirtualCamera cmvcam;*/
-
     private void Start()
     {
-        GUIManager.Instance.UpdateScore((int)score);
         oldScore = score;
     }
 
-    public void UpdateDamageAndScore(float amountUpdate)
+    public void UpdateDamageAndScore(int amountUpdate)
     {
         damage += amountUpdate;
         score = damage;
-        GUIManager.Instance.UpdateScore((int)score);
+        GameManager.I.score = score;
         if (score - oldScore >= pointNecessaryForGrownUp)
         {
             PlayerGrownUp();
         }
+        SignalBus.I.FireSignal<UpdatePlayerScore>(new UpdatePlayerScore(score));
     }
 
     private void PlayerGrownUp()

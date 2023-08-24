@@ -11,7 +11,6 @@ namespace MoreMountains.TopDownEngine
     [AddComponentMenu("TopDown Engine/Managers/GUIManager")]
     public class GUIManager : MMSingleton<GUIManager>
     {
-        public Canvas MainCanvas;
         public GameObject HUD;
         public GameObject PauseScreen;
         public GameObject DeathScreen;
@@ -21,11 +20,27 @@ namespace MoreMountains.TopDownEngine
         protected float _initialJoystickAlpha;
         protected bool _initialized = false;
 
+        [SerializeField]
+        private Button restartButton;
+
+        [SerializeField]
+        private Button homeButton;
+
         protected override void Awake()
         {
             base.Awake();
-
             Initialization();
+            restartButton.onClick.AddListener(RestartGame);
+            homeButton.onClick.AddListener(BackToHome);
+        }
+
+        private void RestartGame()
+        {
+        }
+
+        private void BackToHome()
+        {
+            /*ScenesChanger.ChangeScene("Home");*/
         }
 
         protected virtual void Initialization()
