@@ -1204,6 +1204,8 @@ MonoBehaviour:
   tween: {fileID: 0}
   playButton: {fileID: 4239241651597771288}
   highScoreText: {fileID: 6684083071278656815}
+  chooseCharacterNextButton: {fileID: 1449793122297762615}
+  chooseCharacterPreviousButton: {fileID: 1463125699940418418}
 --- !u!1 &4112064046667118205
 GameObject:
   m_ObjectHideFlags: 0

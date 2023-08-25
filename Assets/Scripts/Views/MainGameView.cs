@@ -63,6 +63,7 @@ public class MainGameView : MonoBehaviour
             _initialJoystickAlpha = Joystick.alpha;
         }
         _initialized = true;
+        //Joystick.gameObject.SetActive(false);
     }
 
     protected virtual void Start()
@@ -92,13 +93,22 @@ public class MainGameView : MonoBehaviour
         }
     }
 
+    /*    private void SetJoystickPosition()
+        {
+            Vector3 mousePosition = Input.mousePosition;
+            Vector3 centeredMousePosition = new Vector3(mousePosition.x - Screen.width / 2, mousePosition.y - Screen.height / 2, mousePosition.z);
+            RectTransform rectTransform = Joystick.GetComponent<RectTransform>();
+            rectTransform.anchoredPosition = centeredMousePosition;
+            Joystick.gameObject.SetActive(true);
+        }*/
+
     public virtual void SetMobileControlsActive(bool state, InputManager.MovementControls movementControl = InputManager.MovementControls.Joystick)
     {
         Initialization();
 
         if (Joystick != null)
         {
-            Joystick.gameObject.SetActive(state);
+            //Joystick.gameObject.SetActive(state);
             if (state && movementControl == InputManager.MovementControls.Joystick)
             {
                 Joystick.alpha = _initialJoystickAlpha;
@@ -134,4 +144,16 @@ public class MainGameView : MonoBehaviour
         SignalBus.I.Unregister<UpdatePlayerScore>(UpdatePlayerScoreText);
         SignalBus.I.Unregister<TimeOutSignal>(TimeOutHandle);
     }
+
+    /*    private void Update()
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                SetJoystickPosition();
+            }
+            if (Input.GetMouseButtonUp(0))
+            {
+                Joystick.gameObject.SetActive(false);
+            }
+        }*/
 }

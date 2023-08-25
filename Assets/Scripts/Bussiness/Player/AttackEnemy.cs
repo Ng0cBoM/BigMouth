@@ -1,3 +1,4 @@
+using MoreMountains.Feedbacks;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,7 @@ using UnityEngine;
 public class AttackEnemy : MonoBehaviour
 {
     private Player player;
+    public MMFeedbacks attackFeedback;
 
     private void Awake()
     {
@@ -18,10 +20,16 @@ public class AttackEnemy : MonoBehaviour
             Enemy enemy = other.gameObject.GetComponent<Enemy>();
             if (CanAttackEnemy(enemy.health))
             {
+                HandleFeedbacks();
                 other.gameObject.SetActive(false);
                 player.UpdateDamageAndScore(enemy.scoreForPlayerWhenEnemyDead);
             }
         }
+    }
+
+    private void HandleFeedbacks()
+    {
+        attackFeedback?.PlayFeedbacks();
     }
 
     private bool CanAttackEnemy(float healthEnemy)

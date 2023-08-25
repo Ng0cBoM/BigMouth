@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.UI;
+using System;
 
 public class HomeSceneManager : MonoBehaviour
 {
@@ -16,10 +18,20 @@ public class HomeSceneManager : MonoBehaviour
     private void Start()
     {
         RotateCharacter();
-        UiManager.I.Push("HomePage", null);
-        userData = (UserData)MMSaveLoadManager.Load(typeof(UserData), "HighScore", "UserData");
-        //currentCharacter = characterPrefabs[userData.currentCharacterId];
-        //ChooseCharacter();
+        InitUi();
+        userData = (UserData)MMSaveLoadManager.Load(typeof(UserData), "HighScore.txt", "UserData");
+        ChooseCharacter();
+    }
+
+    private void InitUi()
+    {
+        ScreenData screenData = new ScreenData();
+        screenData.screenAction = new Dictionary<string, Action>()
+            {
+                { "nextCharacter", NextCharacter },
+                { "previousCharacter", PreviousCharacter }
+            };
+        UiManager.I.Push("HomePage", screenData);
     }
 
     private void NextCharacter()
@@ -32,8 +44,8 @@ public class HomeSceneManager : MonoBehaviour
         {
             userData.currentCharacterId += 1;
         }
-        MMSaveLoadManager.Save(userData, "HighScore", "UserData");
-        //currentCharacter = characterPrefabs[userData.currentCharacterId];
+        ChooseCharacter();
+        MMSaveLoadManager.Save(userData, "HighScore.txt", "UserData");
     }
 
     private void PreviousCharacter()
@@ -46,8 +58,8 @@ public class HomeSceneManager : MonoBehaviour
         {
             userData.currentCharacterId -= 1;
         }
-        MMSaveLoadManager.Save(userData, "HighScore", "UserData");
-        //currentCharacter = characterPrefabs[userData.currentCharacterId];
+        ChooseCharacter();
+        MMSaveLoadManager.Save(userData, "HighScore.txt", "UserData");
     }
 
     private void ChooseCharacter()
@@ -60,7 +72,7 @@ public class HomeSceneManager : MonoBehaviour
 
     private void RotateCharacter()
     {
-        currentCharacter.transform.DORotate(new Vector3(0, 360, 0), 2, RotateMode.FastBeyond360)
+        currentCharacter.transform.DORotate(new Vector3(0, 360, 0), 3, RotateMode.FastBeyond360)
                 .SetLoops(-1, LoopType.Restart)
                 .SetEase(Ease.Linear);
     }

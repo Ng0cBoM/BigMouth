@@ -14,6 +14,9 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private float timeMatchSeconds = 50;
 
+    [SerializeField]
+    private GameObject[] characterPrefabList;
+
     private float timeShow;
 
     public state gameState;
@@ -39,6 +42,16 @@ public class GameManager : MonoBehaviour
         {
             I = this;
         }
+        ChooseCharacterWhenGameStart();
+    }
+
+    private void ChooseCharacterWhenGameStart()
+    {
+        UserData userData = (UserData)MMSaveLoadManager.Load(typeof(UserData), "HighScore.txt", "UserData");
+        for (int i = 0; i < characterPrefabList.Length; i++)
+        {
+            characterPrefabList[i].SetActive(i == userData.currentCharacterId);
+        }
     }
 
     private void Update()
@@ -59,11 +72,11 @@ public class GameManager : MonoBehaviour
 
     private void UpdateHighScore()
     {
-        UserData userData = (UserData)MMSaveLoadManager.Load(typeof(UserData), "HighScore", "UserData");
+        UserData userData = (UserData)MMSaveLoadManager.Load(typeof(UserData), "HighScore.txt", "UserData");
         if (score > userData.HighScore)
         {
             userData.HighScore = score;
-            MMSaveLoadManager.Save(userData, "HighScore", "UserData");
+            MMSaveLoadManager.Save(userData, "HighScore.txt", "UserData");
         }
     }
 }

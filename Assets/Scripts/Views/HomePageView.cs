@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using MoreMountains.Tools;
 using TMPro;
+using System;
 
 public class HomePageView : ScreenItem
 {
@@ -11,10 +12,19 @@ public class HomePageView : ScreenItem
     [SerializeField] private TextMeshProUGUI highScoreText;
     private int highScore;
 
+    [SerializeField]
+    private Button chooseCharacterNextButton;
+
+    [SerializeField]
+    private Button chooseCharacterPreviousButton;
+
+    private Action nextCharacter;
+    private Action previousCharacter;
+
     private void Awake()
     {
         playButton.onClick.AddListener(StartGame);
-        UserData userData = (UserData)MMSaveLoadManager.Load(typeof(UserData), "HighScore", "UserData");
+        UserData userData = (UserData)MMSaveLoadManager.Load(typeof(UserData), "HighScore.txt", "UserData");
         highScoreText.text = userData.HighScore.ToString();
     }
 
@@ -37,8 +47,18 @@ public class HomePageView : ScreenItem
         yield return null;
     }
 
-    protected override IEnumerator Setup(ScreenData screenData = null)
+    protected override IEnumerator Setup(ScreenData screenData)
     {
+        if (screenData == null)
+        {
+            Debug.LogError("Screen Data Is Null");
+            yield return null;
+        }
+        Debug.Log($"Screen data {screenData.screenAction}");
+        nextCharacter = screenData.screenAction["nextCharacter"];
+        previousCharacter = screenData.screenAction["previousCharacter"];
+        chooseCharacterNextButton.onClick.AddListener(nextCharacter.Invoke);
+        chooseCharacterPreviousButton.onClick.AddListener(previousCharacter.Invoke);
         yield return null;
     }
 }
